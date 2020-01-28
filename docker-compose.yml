@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app-serialport-io:
+    build: .
+    container_name: app-serialport-io
+    image: oaklabs/app-serialport-io:latest
+    network_mode: host
+    stdin_open: true
+    tty: true
+    devices:
+      - /dev/dri
+      - /dev/ttyUSB0
+    volumes:
+      - "$HOME/.Xauthority:/root/.Xauthority:rw"
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev/shm:/dev/shm
+      - /dev:/dev
+    environment:
+      - NODE_ENV=production
