@@ -12,8 +12,7 @@ RUN npm i --engine-strict=true --progress=false --loglevel="error" \
 
 
 # We add an environmental variable that the app looks for to start the app with default url
-ENV NODE_ENV=production \
-    DISPLAY=unix:0.0 
+ENV NODE_ENV=production 
 
 
 # Define the command to run your app using `CMD` which defines your runtime.
