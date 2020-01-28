@@ -9,7 +9,7 @@ port.on('readable', function () {
 
 // Switches the port into "flowing mode"
 port.on('data', function (data) {
-  console.log('Data:', data)
+  console.log('Data:', data.toString())
 })
 
 // // Pipe the data into another stream (like a parser or standard out)
