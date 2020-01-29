@@ -4,7 +4,7 @@ var serialport = require('serialport');
 var SerialPort = serialport.SerialPort;
 
 var port = new SerialPort(process.env.SERIAL_DEVICE, {
-  parser: serialport.parsers.readline('\n'),
+  parser: serialport.parsers.Readline('\n'),
   baudrate: 57600
 })
 
