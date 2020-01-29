@@ -1,9 +1,9 @@
 const SerialPort = require('serialport')
 const port = new SerialPort(process.env.SERIAL_DEVICE)
 
-port.on('readable', function () {
-  console.log('readable data:', port.read().toString('hex'))
-})
+// port.on('readable', function () {
+//   console.log('readable data:', port.read().toString('hex'))
+// })
 
 // Switches the port into "flowing mode"
 port.on('data', function (data) {
