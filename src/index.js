@@ -11,5 +11,5 @@ port.on('data', function (data) {
 })
 
 // Pipe the data into another stream (like a parser or standard out)
-const lineStream = port.pipe(new Readline())
+// const lineStream = port.pipe(new Readline())
 
