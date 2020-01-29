@@ -1,25 +1,18 @@
-// const SerialPort = require('serialport')
-// const port = new SerialPort(process.env.SERIAL_DEVICE)
-
-// port.on('readable', function () {
-//   console.log('readable data:', port.read().toString('hex'))
-// })
-
-// Switches the port into "flowing mode"
-// port.on('data', function (data) {
-//   console.log('data:', data.toString('hex'))
-// })
-
-// Pipe the data into another stream (like a parser or standard out)
-// const lineStream = port.pipe(new Readline())
 
 const SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline')
+
 var port = new SerialPort(process.env.SERIAL_DEVICE, {
     baudRate: 57600
 });
 
-const parser = port.pipe(new Readline({ encoding: 'hex' }))
-port.on('data', data => console.log({ port: data.toString('hex') }))
+const parser = port.pipe(new Readline({ detimiter: '\r', encoding: 'utf8' }))
+
+port.on('data', data => console.log({ port: data.toString('utf8') }))
 parser.on('data', data => console.log({ parser: data }))
 
+function hexToString(str)
+{
+    const buf = new Buffer(str, 'hex');
+    return buf.toString('utf8');
+}
