@@ -16,11 +16,10 @@
 var SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline')
 var port = new SerialPort(process.env.SERIAL_DEVICE, {
-baudRate: 57600
+    baudRate: 57600
 });
 
-const parser = port.pipe(new Readline({encoding: 'hex'}))
-parser.on('data', function(x){
-    console.log(x)
-})
+const parser = port.pipe(new Readline({ delimiter: '\n', encoding: 'hex' }))
+port.on('data', data => console.log({ port: data.toString('hex') }))
+parser.on('data', data => console.log({ parser: data }))
 
