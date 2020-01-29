@@ -1,23 +1,12 @@
 'use strict';
 
-var serialport = require('serialport');
-var SerialPort = serialport.SerialPort;
-var readline = new serialport.parsers.Readline('\n')
+const SerialPort = require('serialport')
+const Readline = require('@serialport/parser-readline')
 
 var port = new SerialPort(process.env.SERIAL_DEVICE, {
-  parser: readline,
   baudrate: 57600
 })
 
-// Read data that is available but keep the stream in "paused mode"
-port.on('readable', function () {
-  console.log('Read Data:', port.read())
-})
+const parser = port.pipe(new Readline({ delimiter: '\r\n' }))
+parser.on('data', console.log)
 
-// Switches the port into "flowing mode"
-port.on('data', function (data) {
-  console.log('Data:', data)
-})
-
-// // Pipe the data into another stream (like a parser or standard out)
-// const lineStream = port.pipe(new Readline())
