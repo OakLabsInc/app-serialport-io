@@ -14,13 +14,12 @@
 // const lineStream = port.pipe(new Readline())
 
 const SerialPort = require('serialport');
-var Delimiter = SerialPort.parsers.Delimiter;
-
+const Readline = require('@serialport/parser-readline')
 var port = new SerialPort(process.env.SERIAL_DEVICE, {
     baudRate: 57600
 });
 
-var parser = port.pipe(new Delimiter({delimiter: Buffer.from('EOL')}));
+const parser = port.pipe(new Readline({ encoding: 'hex' }))
 port.on('data', data => console.log({ port: data.toString('hex') }))
 parser.on('data', data => console.log({ parser: data }))
 
