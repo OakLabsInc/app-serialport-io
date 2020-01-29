@@ -4,7 +4,7 @@ const port = new SerialPort(process.env.SERIAL_DEVICE)
 
 // Read data that is available but keep the stream in "paused mode"
 port.on('readable', function () {
-  console.log('Read Data:', port.read().toString())
+  console.log('Read Data:', port.read().toString('hex'))
 })
 
 // // Switches the port into "flowing mode"
