@@ -4,7 +4,7 @@ const SerialPort = require('serialport')
 const Readline = require('@serialport/parser-readline')
 
 var port = new SerialPort(process.env.SERIAL_DEVICE, {
-  baudrate: 57600
+  baudRate: 57600
 })
 
 const parser = port.pipe(new Readline({ delimiter: '\r\n' }))
