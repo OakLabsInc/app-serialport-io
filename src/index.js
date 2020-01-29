@@ -6,7 +6,7 @@ var port = new SerialPort(process.env.SERIAL_DEVICE, {
     baudRate: 57600
 });
 
-const parser = port.pipe(new Readline({ detimiter: '\r', encoding: 'utf8' }))
+const parser = port.pipe(new Readline({ delimiter: '\r', encoding: 'utf8' }))
 
 port.on('data', data => console.log({ port: data.toString('utf8') }))
 parser.on('data', data => console.log({ parser: data }))
