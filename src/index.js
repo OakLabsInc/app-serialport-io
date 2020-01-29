@@ -13,9 +13,14 @@
 // Pipe the data into another stream (like a parser or standard out)
 // const lineStream = port.pipe(new Readline())
 
-const SerialPort = require('serialport')
+var SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline')
-const port = new SerialPort(process.env.SERIAL_DEVICE)
-const parser = port.pipe(new Readline({ delimiter: '\r\n' }))
-parser.on('data', console.log)
+var port = new SerialPort(process.env.SERIAL_DEVICE, {
+baudRate: 57600
+});
+
+const parser = port.pipe(new Readline({encoding: 'hex'}))
+parser.on('data', function(x){
+    console.log(x)
+})
 
