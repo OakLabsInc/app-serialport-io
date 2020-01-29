@@ -2,9 +2,10 @@
 
 var serialport = require('serialport');
 var SerialPort = serialport.SerialPort;
+var readline = new serialport.parsers.Readline('\n')
 
 var port = new SerialPort(process.env.SERIAL_DEVICE, {
-  parser: serialport.parsers.Readline('\n'),
+  parser: readline,
   baudrate: 57600
 })
 
